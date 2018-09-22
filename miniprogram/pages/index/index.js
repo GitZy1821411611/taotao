@@ -8,19 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    movies: [{
-        url: 'http://img04.tooopen.com/images/20130712/tooopen_17270713.jpg'
-      },
-      {
-        url: 'http://img04.tooopen.com/images/20130617/tooopen_21241404.jpg'
-      },
-      {
-        url: 'http://img04.tooopen.com/images/20130701/tooopen_20083555.jpg'
-      },
-      {
-        url: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg'
-      }
-    ]
+    movies: [],
+    locationId: "290"
   },
 
   /**
@@ -37,11 +26,19 @@ Page({
 
   },
   getMovie: function() {
+    wx.showLoading({
+      title:"加载中"
+    })
+    var self = this;
     wx.request({
-      url: api + "Showtime/LocationMovies.api?locationId=290",
+      url: api + "Showtime/LocationMovies.api?locationId=" + this.data.locationId,
       method: "get",
       success: function(res) {
-        console.log(res)
+        wx.hideLoading()
+        self.setData({
+          movies: res.data.ms
+        })
+        console.log(self.data.movies)
       },
       fail: function(res) {
 

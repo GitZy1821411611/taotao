@@ -1,14 +1,21 @@
 <!--miniprogram/pages/index/index.wxml-->
 <view class='index'>
-  <view class='swaper'>
-    <!--swaper.wxml-->
-    <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">
-      <block wx:for="{{movies}}" wx:for-index="index">
-        <swiper-item>
-          <image src="{{item.url}}" class="slide-image" mode="aspectFill" />
-        </swiper-item>
-      </block>
-    </swiper>
-
+  <view class='location'>
+    <van-cell-group>
+      <van-cell title="合肥" icon="location" border="{{ false }}">
+        <van-icon slot="right-icon" name="search" class="van-cell__right-icon" /></van-cell>
+    </van-cell-group>
+  </view>
+  <view class='image-list'>
+    <view class='section-box' wx:for="{{movies}}">
+      <view class='section-image'>
+        <image mode="aspectFit" src='{{item.img}}' lazy-load="true"></image>
+      </view>
+      <view class='section-content'>
+        <van-cell title="{{item.t}}" value="" value="{{'评分：'+item.r}}" border="{{ false }}" title-class="movie-title"/>
+        <van-cell title="{{'导演：'+item.dN}}" value="{{item.movieType}}" label="" border="{{ false }}" />
+        <van-cell title="{{'演员：'+item.actors}}"  label="" border="{{ false }}" />
+      </view>
+    </view>
   </view>
 </view>
